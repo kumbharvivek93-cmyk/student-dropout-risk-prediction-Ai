@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Performance Analyzer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* Navbar */
+        nav {
+            height: 70px;
+            background: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #bfdbfe;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: #172554;
+        }
+
+        .hero-content h1 span {
+            color: #2563eb;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Illustration */
+        .hero-card {
+            width: 400px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero-card h2 {
+            color: #172554;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .stat span:last-child {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        /* Features */
+        .features {
+            padding: 70px 8%;
+            background: white;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 32px;
+            color: #172554;
+            margin-bottom: 40px;
+        }
+
+        .feature-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature {
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+
+        .feature p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+
+        <div class="logo">
+            StudentAI
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/predict">Predict</a>
+            <a href="/dashboard">Dashboard</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+                <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for msg in messages %}
+
+                    <div class="flash-message">
+                        {{ msg }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+            <h1>
+                Predict Student
+                <span>Performance</span>
+                Using AI
+            </h1>
+
+            <p>
+                A Machine Learning based system that analyzes
+                student academic information and predicts their
+                performance risk level.
+            </p>
+
+            <a href="/login" class="btn">
+                Start Prediction →
+            </a>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <h2>Student Analysis</h2>
+
+            <div class="stat">
+                <span>Attendance</span>
+                <span>85%</span>
+            </div>
+
+            <div class="stat">
+                <span>Previous GPA</span>
+                <span>7.8</span>
+            </div>
+
+            <div class="stat">
+                <span>Study Hours</span>
+                <span>4 hrs</span>
+            </div>
+
+            <div class="stat">
+                <span>Assignments</span>
+                <span>90%</span>
+            </div>
+
+            <div class="stat">
+                <span>Risk Level</span>
+                <span>LOW</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features -->
+    <section class="features">
+
+        <h2>How Our System Works</h2>
+
+        <div class="feature-container">
+
+            <div class="feature">
+
+                <div class="icon">📊</div>
+
+                <h3>Enter Student Data</h3>
+
+                <p>
+                    Provide academic information such as
+                    attendance, GPA, study hours and assignments.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="icon">🤖</div>
+
+                <h3>Machine Learning</h3>
+
+                <p>
+                    Our trained Machine Learning model analyzes
+                    the student's academic characteristics.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="icon">🎯</div>
+
+                <h3>Risk Prediction</h3>
+
+                <p>
+                    The system predicts whether the student has
+                    Low, Moderate or High academic risk.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 StudentAI | Student Performance Prediction System
+        </p>
+
+    </footer>
+
+</body>
+</html>
+</body>
+</html>
