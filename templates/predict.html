@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudentAI | Prediction</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #18285c;
+        }
+
+        /* Navbar */
+        nav {
+            height: 66px;
+            background: #203d8f;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            width: 80%;
+            margin: auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        /* Main */
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 70px auto;
+        }
+
+        .heading {
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .heading h1 span {
+            color: #2864e8;
+        }
+
+        .heading p {
+            font-size: 17px;
+            color: #58708e;
+            line-height: 1.6;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #263867;
+        }
+
+        input {
+            padding: 13px 15px;
+            border: 1px solid #ccd5e5;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #2864e8;
+            box-shadow: 0 0 0 3px rgba(40, 100, 232, 0.1);
+        }
+
+        input::placeholder {
+            color: #9aa8bc;
+        }
+
+        .submit-btn {
+            margin-top: 30px;
+            background: #2864e8;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #1f55c9;
+            transform: translateY(-1px);
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+
+            .nav-container,
+            .container {
+                width: 90%;
+            }
+
+            .container {
+                margin: 45px auto;
+            }
+
+            .heading h1 {
+                font-size: 32px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: span 1;
+            }
+
+            .form-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">StudentAI</div>
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <div class="heading">
+            <h1>
+                Student <span>Performance</span><br>
+                Prediction
+            </h1>
+
+            <p>
+                Enter the student's academic information to predict
+                their performance risk level using AI.
+            </p>
+        </div>
+
+
+        <!-- Prediction Form -->
+        <div class="form-card">
+
+            <form method="post">
+
+                <div class="form-grid">
+
+                    <!-- Name -->
+                    <div class="form-group full">
+                        <label for="name">Student Name</label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter student's name"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Attendance -->
+                    <div class="form-group">
+                        <label for="attendence">Attendance (%)</label>
+
+                        <input
+                            type="number"
+                            id="attendence"
+                            name="attendence"
+                            placeholder="e.g. 85"
+                            min="0"
+                            max="100"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Previous Year CGPA -->
+                    <div class="form-group">
+                        <label for="privious_year_cgpa">
+                            Previous Year CGPA
+                        </label>
+
+                        <input
+                            type="number"
+                            id="privious_year_cgpa"
+                            name="privious_year_cgpa"
+                            placeholder="e.g. 8.2"
+                            min="0"
+                            max="10"
+                            step="0.01"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Internal Marks -->
+                    <div class="form-group">
+                        <label for="internal_marks">
+                            Internal Marks
+                        </label>
+
+                        <input
+                            type="number"
+                            id="internal_marks"
+                            name="internal_marks"
+                            placeholder="e.g. 75"
+                            min="0"
+                            max="100"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Backlogs -->
+                    <div class="form-group">
+                        <label for="backlogs">Number of Backlogs</label>
+
+                        <input
+                            type="number"
+                            id="backlogs"
+                            name="backlogs"
+                            placeholder="e.g. 0"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Assignment -->
+                    <div class="form-group">
+                        <label for="assi">
+                            Assignment Score
+                        </label>
+
+                        <input
+                            type="number"
+                            id="assi"
+                            name="assi"
+                            placeholder="e.g. 80"
+                            min="0"
+                            max="100"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Attentation Score -->
+                    <div class="form-group">
+                        <label for="score">
+                            Attentation Score
+                        </label>
+
+                        <input
+                            type="number"
+                            id="score"
+                            name="score"
+                            placeholder="Enter score"
+                            min="0"
+                            max="100"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="submit-btn">
+                    Predict Performance →
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
