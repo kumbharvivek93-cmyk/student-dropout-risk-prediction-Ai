@@ -1,6 +1,7 @@
 from flask import Flask,render_template,redirect,session,flash,request,url_for
 from flask_sqlalchemy import SQLAlchemy  
 from datetime import timedelta,datetime
+import joblib
 
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///students.sqlite3'
@@ -8,6 +9,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db=SQLAlchemy(app) 
 app.permanent_session_lifetime=timedelta(days=2)
 app.secret_key='vivekkali'
+model=joblib.load('studentsriskmodelensemble.pkl')
+scaler=joblib.load('studentsriskscalerensemble.pkl')
 
 
 class Students_sy_AI_C(db.Model):
@@ -31,6 +34,23 @@ class Admin(db.Model):
 def string_validator(sample):
     if sample.strip()=='' or len(sample)<2:
         return f'enter a valid username or password'
+
+def prediction_score(backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation):
+    obs=scaler.transform([backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation])
+    rep=model.predict(obs)
+    return rep
+
+def give_category(resp):
+    cat=None
+    if 60<resp<1000:
+        cat='High'
+        return cat
+    if 30<resp<60:
+        cat='Medium:
+        return cat
+    if -100<resp<30:
+        cat='Low'
+        return cat
 
 
 @app.route("/",methods=['GET','POST'])     
@@ -71,7 +91,14 @@ def predict():
 
         string_validator(name)
 
-        return 'working fine'        
+        resp=[backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation]
+        respo=prediction_score(backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation)
+        category=
+
+        
+
+
+        
     else:
         return render_template('predict.html')
 
