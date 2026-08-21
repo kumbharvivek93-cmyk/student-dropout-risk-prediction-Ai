@@ -9,8 +9,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db=SQLAlchemy(app) 
 app.permanent_session_lifetime=timedelta(days=2)
 app.secret_key='vivekkali'
-model=joblib.load('studentsriskmodelensemble.pkl')
-scaler=joblib.load('studentsriskscalerensemble.pkl')
+model=joblib.load("C:/Users/vivek kumbhar/Desktop/student risk predictor/model/vivekmodel.pkl")
+scaler=joblib.load("C:/Users/vivek kumbhar/Desktop/student risk predictor/model/scaler.pkl")
 
 
 class Students_sy_AI_C(db.Model):
@@ -35,9 +35,17 @@ def string_validator(sample):
     if sample.strip()=='' or len(sample)<2:
         return f'enter a valid username or password'
 
-def prediction_score(backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation):
-    obs=scaler.transform([backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation])
-    rep=model.predict(obs)
+def prediction_score(backlogs, attendence, privious_year_cgpa, internal_marks, assi, score_of_attentation):
+    obs = scaler.transform([[
+        backlogs,
+        attendence,
+        privious_year_cgpa,
+        internal_marks,
+        assi,
+        score_of_attentation
+    ]])
+
+    rep = round(float(model.predict(obs)[0]), 2)
     return rep
 
 def give_category(resp):
@@ -46,7 +54,7 @@ def give_category(resp):
         cat='High'
         return cat
     if 30<resp<60:
-        cat='Medium:
+        cat='Medium'
         return cat
     if -100<resp<30:
         cat='Low'
@@ -93,24 +101,16 @@ def predict():
 
         resp=[backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation]
         respo=prediction_score(backlogs,attendence,privious_year_cgpa,internal_marks,assi,score_of_attentation)
-        category=
-
-        
-
-
-        
-    else:
+        category=give_category(respo)
+        return f'the risk is {respo} and category is {category}'
+    else :
         return render_template('predict.html')
 
-        return 'working fine'
+
+
+
+
         
-
-
-
-        
-        
-
-
 
 if __name__=='__main__':  # running conditions
     app.run(debug=True)
